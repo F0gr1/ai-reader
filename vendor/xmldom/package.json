@@ -1,0 +1,47 @@
+{
+  "name": "@xmldom/xmldom",
+  "version": "0.9.12",
+  "description": "A pure JavaScript W3C standard-based (XML DOM Level 2 Core) DOMParser and XMLSerializer module.",
+  "keywords": [
+    "w3c",
+    "dom",
+    "xml",
+    "parser",
+    "javascript",
+    "DOMParser",
+    "XMLSerializer",
+    "ponyfill"
+  ],
+  "homepage": "https://github.com/xmldom/xmldom",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/xmldom/xmldom.git"
+  },
+  "main": "lib/index.js",
+  "types": "index.d.ts",
+  "files": [
+    "CHANGELOG.md",
+    "LICENSE",
+    "readme.md",
+    "SECURITY.md",
+    "index.d.ts",
+    "lib"
+  ],
+  "config": {
+    "test_stack_size": 256
+  },
+  "engines": {
+    "node": ">=14.6"
+  },
+  "bugs": {
+    "url": "https://github.com/xmldom/xmldom/issues"
+  },
+  "license": "MIT",
+  "auto-changelog": {
+    "prepend": true,
+    "remote": "origin",
+    "tagPrefix": "",
+    "template": "./auto-changelog.hbs"
+  },
+  "packageManager": "npm@11.19.0+sha512.48377f8478372aa1c4e47b763475b135836da82436a5700f2e5e8eb5084fc840f93c7b117eb3ad3b5f7d3194c81b6710a10d59448f6ddbcb21ac3fb672bdc003"
+}

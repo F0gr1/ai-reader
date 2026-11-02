@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>AI情報リーダー</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">LOCAL READER</p>
+          <h1>AI情報リーダー</h1>
+          <p>記事を読み、Skills・プラグインの配布元を見つける</p>
+        </div>
+        <div class="header-actions">
+          <button id="theme" type="button">テーマ切替</button
+          ><button id="refresh" type="button">情報源を更新</button>
+        </div>
+      </header>
+      <p id="notice" role="status" aria-live="polite">読み込み中です</p>
+      <nav class="reader-nav" aria-label="表示の切替">
+        <button id="show-discovery" type="button" aria-pressed="false">
+          Skills・プラグインを見つける
+        </button>
+        <button id="show-reading" type="button" aria-pressed="true">記事を読む</button>
+      </nav>
+      <section id="discovery-panel" aria-labelledby="discovery-title" hidden>
+        <h2 id="discovery-title">Skills・プラグインを見つける</h2>
+        <p class="note">
+          固定候補は2026年11月2日の調査時点の案内です。新着や人気の順位ではありません。公式カタログの更新は掲載内容の変更で、個別Skillのリリースではありません。実動作は未確認です。X投稿は自動取得しません。
+        </p>
+        <label class="discovery-filter"
+          >表示
+          <select id="discovery-view">
+            <option value="all">すべて</option>
+            <option value="candidates">固定候補</option>
+            <option value="updates">カタログ更新</option>
+            <option value="related">取得した関連記事</option>
+            <option value="saved">保存済み</option>
+          </select>
+        </label>
+        <p id="discovery-status" class="note" role="status"></p>
+        <div id="discovery-items"></div>
+      </section>
+      <div id="reading-panel">
+        <section class="controls" aria-label="記事の絞り込み">
+          <label
+            >記事を検索<input id="search" type="search" placeholder="タイトル・抜粋を検索" /></label
+          ><label
+            >情報源<select id="source">
+              <option value="">すべての情報源</option>
+            </select></label
+          ><label
+            >話題<select id="topic">
+              <option value="">すべての話題</option>
+              <option value="codex">Codex</option>
+              <option value="claude">Claude Code</option>
+              <option value="skills">Skills・指示ファイル</option>
+              <option value="practice">活用事例</option>
+            </select></label
+          ><label
+            >表示<select id="view">
+              <option value="all">すべて</option>
+              <option value="unread">未読</option>
+              <option value="saved">保存</option>
+            </select></label
+          >
+        </section>
+        <p class="note">
+          話題は見出し・抜粋・Zennトピック名のキーワードによる機械的分類です。内容や信頼性をAIが確認したものではありません。
+        </p>
+        <section class="guides" aria-labelledby="guides-title">
+          <h2 id="guides-title">公式の使い方ガイド</h2>
+          <p class="note">固定リンクです。記事とは別にお読みください。</p>
+          <div class="guide-links">
+            <a
+              href="https://learn.chatgpt.com/docs/build-skills"
+              target="_blank"
+              rel="noopener noreferrer"
+              >OpenAI · Skillsを作る</a
+            >
+            <a
+              href="https://developers.openai.com/cookbook/examples/codex/iterating-development-workflows-with-codex"
+              target="_blank"
+              rel="noopener noreferrer"
+              >OpenAI · Codexの開発ワークフロー</a
+            >
+            <a
+              href="https://code.claude.com/docs/en/common-workflows"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Claude Code · 開発での使い方・活用手順</a
+            >
+            <a
+              href="https://code.claude.com/docs/en/skills"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Claude Code · Skills</a
+            >
+            <a
+              href="https://code.claude.com/docs/en/memory"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Claude Code · CLAUDE.mdとAGENTS.md</a
+            >
+          </div>
+        </section>
+        <div class="layout">
+          <section class="articles" aria-labelledby="articles-title">
+            <h2 id="articles-title">記事</h2>
+            <div id="articles"></div>
+          </section>
+          <aside>
+            <section>
+              <h2>情報源</h2>
+              <div id="sources"></div>
+            </section>
+            <section>
+              <h2>X投稿を手動保存</h2>
+              <p>Xの自動取得には対応していません。元投稿URLだけを保存します。</p>
+              <form id="x-form">
+                <label
+                  >投稿URL<input
+                    id="x-url"
+                    type="url"
+                    required
+                    placeholder="https://x.com/…/status/…" /></label
+                ><label>タイトル（任意）<input id="x-title" maxlength="200" /></label
+                ><button type="submit">投稿を保存</button>
+              </form>
+              <div id="manual"></div>
+            </section>
+            <p class="note">AI要約は未対応です。記事の原文はリンク先でお読みください。</p>
+          </aside>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
